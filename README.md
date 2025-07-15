@@ -1,2 +1,8 @@
-# hookah-website
-A hookah website demo for experimentation and trials
+title: hookah-lounge
+emoji: 🐳
+colorFrom: blue
+colorTo: blue
+sdk: static
+pinned: false
+tags:
+  - deepsite

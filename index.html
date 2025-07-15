@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ναργιλές  | Premium Shisha Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f59e0b',
+                        secondary: '#7c3aed',
+                        dark: '#111827',
+                        light: '#f3f4f6',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        display: ['"Playfair Display"', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        .hero {
+            background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.85)), url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .flavor-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
+        }
+        
+        .flavor-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.25);
+        }
+        
+        .flavor-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flavor-card:hover .flavor-card-inner {
+            transform: rotateX(5deg);
+        }
+        
+        .gallery-item {
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .testimonial-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: """;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 100px;
+            color: rgba(245, 158, 11, 0.1);
+            line-height: 1;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px #f59e0b;
+            color: transparent;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+        
+        .menu-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-tab.active {
+            background-color: #f59e0b;
+            color: #111827;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-dark bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-smoking text-primary text-3xl animate-float"></i>
+                    <span class="text-2xl font-bold text-primary font-display">Hookah Lounge</span>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="#home" class="text-light hover:text-primary transition font-medium">Αρχική</a>
+                    <a href="#menu" class="text-light hover:text-primary transition font-medium">Μενού</a>
+                    <a href="#gallery" class="text-light hover:text-primary transition font-medium">Gallery</a>
+                    <a href="#about" class="text-light hover:text-primary transition font-medium">Σχετικά</a>
+                    <a href="#contact" class="text-light hover:text-primary transition font-medium">Επικοινωνία</a>
+                    <a href="#reservation" class="bg-primary hover:bg-primary/90 text-dark font-bold py-2 px-6 rounded-full transition duration-300 ml-4">Κράτηση</a>
+                </div>
+                <div class="lg:hidden">
+                    <button id="menu-btn" class="text-light focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4">
+                <a href="#home" class="block py-3 text-light hover:text-primary transition border-b border-gray-800">Αρχική</a>
+                <a href="#menu" class="block py-3 text-light hover:text-primary transition border-b border-gray-800">Μενού</a>
+                <a href="#gallery" class="block py-3 text-light hover:text-primary transition border-b border-gray-800">Gallery</a>
+                <a href="#about" class="block py-3 text-light hover:text-primary transition border-b border-gray-800">Σχετικά</a>
+                <a href="#contact" class="block py-3 text-light hover:text-primary transition border-b border-gray-800">Επικοινωνία</a>
+                <a href="#reservation" class="block mt-4 bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-6 rounded-full transition duration-300 text-center">Κράτηση</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center justify-center pt-24 relative">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-primary font-display tracking-tight">Φέρε <span class="text-light">Ναργιλές</span></h1>
+            <div class="w-24 h-1 bg-primary mx-auto mb-8"></div>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto font-medium">Απολαύστε premium γεύσεις shisha σε μια πολυτελή ατμόσφαιρα</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#menu" class="bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Δείτε το Μενού</a>
+                <a href="#reservation" class="bg-transparent hover:bg-light hover:text-dark border-2 border-light text-light font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Κάντε Κράτηση</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#menu" class="text-light hover:text-primary text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Flavors Menu -->
+    <section id="menu" class="py-20 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary font-display">Οι Γεύσεις Μας</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-xl max-w-2xl mx-auto">Ανακαλύψτε την εκτενή μας ποικιλία επιλεγμένων γεύσεων από όλο τον κόσμο</p>
+            </div>
+            
+            <!-- Menu Tabs -->
+            <div class="flex flex-wrap justify-center mb-12 gap-2">
+                <button class="menu-tab active px-6 py-2 rounded-full border border-primary text-primary" data-category="all">Όλα</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="fruity">Απλοί</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="minty">Special</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="dessert">Premium</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="exotic">Quasar</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="drinks">Ποτά</button>
+                <button class="menu-tab px-6 py-2 rounded-full border border-gray-700 hover:border-primary hover:text-primary" data-category="food">Φαγητό</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Flavor Card 1 -->
+                <div class="flavor-card" data-category="fruity minty">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80');">
+                            <span class="absolute top-4 right-4 bg-primary text-dark font-bold px-3 py-1 rounded-full text-sm">Best Seller</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Blueberry Mint</h3>
+                            <p class="text-gray-300 mb-4">A refreshing blend of sweet blueberries and cool mint leaves</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€25</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flavor Card 2 -->
+                <div class="flavor-card" data-category="fruity">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <span class="absolute top-4 right-4 bg-purple-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Traditional</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Double Apple</h3>
+                            <p class="text-gray-300 mb-4">Classic Middle Eastern flavor with a crisp apple taste</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€22</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flavor Card 3 -->
+                <div class="flavor-card" data-category="fruity">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80');">
+                            <span class="absolute top-4 right-4 bg-pink-500 text-dark font-bold px-3 py-1 rounded-full text-sm">New</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Pink Lemonade</h3>
+                            <p class="text-gray-300 mb-4">Sweet and tangy summer favorite with a refreshing twist</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€24</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flavor Card 4 -->
+                <div class="flavor-card" data-category="fruity minty">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1603569283847-aa6f53b5a4d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <span class="absolute top-4 right-4 bg-green-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Popular</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Grape Mint</h3>
+                            <p class="text-gray-300 mb-4">Juicy grape flavor perfectly balanced with cool mint</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€23</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flavor Card 5 -->
+                <div class="flavor-card" data-category="exotic dessert">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1559181567-1dc6673c3993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <span class="absolute top-4 right-4 bg-blue-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Exotic</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Coconut Mojito</h3>
+                            <p class="text-gray-300 mb-4">Tropical coconut with lime and mint for a vacation vibe</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€26</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flavor Card 6 -->
+                <div class="flavor-card" data-category="dessert">
+                    <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                        <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');">
+                            <span class="absolute top-4 right-4 bg-yellow-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Winter Special</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold mb-2 text-primary">Spiced Chai</h3>
+                            <p class="text-gray-300 mb-4">Warm cinnamon, cardamom and vanilla for a cozy experience</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">€24</span>
+                                <div class="flex space-x-1 text-primary">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Drinks Menu -->
+            <div class="flavor-card" data-category="drinks">
+                <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1631&q=80');">
+                        <span class="absolute top-4 right-4 bg-blue-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Signature</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-primary">Classic Mojito</h3>
+                        <p class="text-gray-300 mb-4">Fresh mint, lime, sugar and rum with soda water</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€9</span>
+                            <div class="flex space-x-1 text-primary">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More drink cards would go here... -->
+
+            <!-- Food Menu -->
+            <div class="flavor-card" data-category="food">
+                <div class="flavor-card-inner h-full bg-gray-800 rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-64 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1498&q=80');">
+                        <span class="absolute top-4 right-4 bg-yellow-500 text-dark font-bold px-3 py-1 rounded-full text-sm">Popular</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-primary">Meze Platter</h3>
+                        <p class="text-gray-300 mb-4">Selection of traditional Greek appetizers and dips</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold">€18</span>
+                            <div class="flex space-x-1 text-primary">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More food cards would go here... -->
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary font-display">Η Ατμόσφαιρα μας</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-xl max-w-2xl mx-auto">Εισέλθετε στον κόσμο της χαλάρωσης και των κορυφαίων εμπειριών μας</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/1d/68/3b/3a/premium-shisha.jpg" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrMyW1w2R9y1VQmPiNogMNKNNUDlLU_TPN9g&s" alt="Hookah Setup" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1whttps://images.unsplash.com/photo-1560743641-3914e2b7122e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Hookah Lounge Interior"YWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Hookah Smoke" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://cdn.shopify.com/s/files/1/0276/9757/8071/files/hookah-lounge.jpg?v=1695245396" alt="Hookah Bar Seating" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE6kzkWrWNyHSpUo_LXB3t7UDxtBJ-FFszgg&s" alt="Hookah Flavors" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://i.ytimg.com/vi/xJ9iW2o5Lj8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDLYpJQvC1ENO4wa6YK4M3RjIWxOg" alt="Hookah Lounge Night" class="w-full h-full object-cover">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFUU5inHhsJ70vTKXavfan3IDtSlu6Ejphvj11_wKQYgNe3rSQk-ZVk0N4HwyJ49nVOVs&usqp=CAU">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMlNSNI3falq3I8eWuXjphnYu6t2V1IvbSEommZnXBefZnFWtGfqNyCzmbKGfnklTn-Z0&usqp=CAU">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax py-32" style="background-image: url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6 text-primary font-display">Premium Experience</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Απολαύστε μια μοναδική εμπειρία με τα premium προϊόντα μας</p>
+            <a href="#reservation" class="inline-block bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Κάντε Κράτηση</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-primary font-display">Our Story</h2>
+                    <div class="w-24 h-1 bg-primary mb-6"></div>
+                    <p class="text-lg mb-4">Ιδρυμένο το 2015, το Φέρε Ναργιλές Lounge γεννήθηκε από το πάθος να φέρνει τους ανθρώπους κοντά μέσω της τέχνης του ναργιλέ. Οι ιδρυτές μας ταξίδεψαν σε όλο τον κόσμο για να βρουν τα καλύτερα μείγματα καπνού και να δημιουργήσουν μια ατμόσφαιρα που συνδυάζει την παράδοση της Μέσης Ανατολής με τη σύγχρονη πολυτέλεια.</p>
+                    <p class="text-lg mb-6">Σήμερα, είμαστε περήφανοι που είμαστε ο κορυφαίος προορισμός για ναργιλέ στην πόλη, γνωστοί για την εξαιρετική μας εξυπηρέτηση, τις εκλεκτές γεύσεις και την αξέχαστη ατμόσφαιρα.</p>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center bg-gray-800 p-4 rounded-lg">
+                            <div class="text-3xl font-bold text-primary">100+</div>
+                            <div class="text-sm">Γεύσεις</div>
+                        </div>
+                        <div class="text-center bg-gray-800 p-4 rounded-lg">
+                            <div class="text-3xl font-bold text-primary">8</div>
+                            <div class="text-sm">Χρόνια Εμπειρίας</div>
+                        </div>
+                        <div class="text-center bg-gray-800 p-4 rounded-lg">
+                            <div class="text-3xl font-bold text-primary">5K+</div>
+                            <div class="text-sm">Ικανοποιημένοι πελάτες</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <img src="https://t4.ftcdn.net/jpg/05/17/56/79/360_F_517567984_DGvlpcycMWh0CBHWhtsYlJMK7fqifV31.jpg" alt="Our Hookah Lounge" class="rounded-lg shadow-xl">
+                        <div class="absolute -bottom-6 -right-6 bg-primary text-dark p-6 rounded-lg shadow-lg animate-pulse-slow">
+                            <i class="fas fa-award text-4xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary font-display">Τι Λένε Οι Πελάτες Μας</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-xl max-w-2xl mx-auto">Μην πιστεύετε μόνο τα λόγια μας - ακούστε τους πελάτες μας</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-gray-800 p-8 rounded-lg relative">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Η γεύση Blueberry Mint είναι απολύτως απίστευτη! Η ατμόσφαιρα είναι ιδανική για μια βραδινή έξοδο με φίλους. Σίγουρα θα ξαναέρθω!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Χαρά Κ." class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Χαρά Κ.</h4>
+                            <p class="text-sm text-gray-400">Συχνή Πελάτης</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-gray-800 p-8 rounded-lg relative">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">«Ως κάποιος που έχει ταξιδέψει εκτενώς στη Μέση Ανατολή, μπορώ να πω ότι το Cloud9 προσφέρει μια αυθεντική εμπειρία με σύγχρονες ανέσεις. Το προσωπικό είναι αληθινοί επαγγελματίες.»</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Michael T." class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Μιχάλης Τ.</h4>
+                            <p class="text-sm text-gray-400">Πρώτη φορά επισκέπτης</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-gray-800 p-8 rounded-lg relative">
+                    <div class="flex items-center mb-4">
+                        <div class="text-primary mr-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">"Γιορτάσαμε τα γενέθλιά μου εδώ και ήταν τέλεια! Οι ναργιλέδες ήταν καταπληκτικοί και μας έδωσαν ακόμη και ένα δωρεάν επιδόρπιο. Το συνιστώ 10/10!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jessica L." class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Ιωάννα Π.</h4>
+                            <p class="text-sm text-gray-400">Εορτασμός Γενεθλίων</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-primary font-display">Επισκεφθείτε μας</h2>
+                    <div class="w-24 h-1 bg-primary mb-6"></div>
+                    <p class="text-lg mb-8">Θα χαρούμε να σας καλωσορίσουμε στο Cloud9 Hookah Lounge. Κάντε κράτηση τραπεζιού ή ελάτε κατά τις ώρες λειτουργίας μας.</p>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-4 text-light">Hours</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span>Monday - Thursday</span>
+                                <span>4:00 PM - 12:00 AM</span>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-700 pb-2">
+                                <span>Friday - Saturday</span>
+                                <span>4:00 PM - 2:00 AM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Sunday</span>
+                                <span>4:00 PM - 11:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-light">Contact Info</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-primary mr-4 text-xl"></i>
+                                <span>Πρέσπας 22 , Ίλιον </span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-primary mr-4 text-xl"></i>
+                                <span>(+30) 6949853037</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-primary mr-4 text-xl"></i>
+                                <span>giferent14@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-3xl font-bold mb-6 text-primary font-display">Κράτηση Τραπεζιού</h3>
+                        <form id="reservation-form">
+                            <div class="mb-4">
+                                <label for="name" class="block mb-2">Ονοματεπώνυμο</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block mb-2">Ηλεκτρονική Διεύθυνση</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block mb-2">Τηλέφωνο</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="date" class="block mb-2">Date</label>
+                                    <input type="date" id="date" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                                </div>
+                                <div>
+                                    <label for="time" class="block mb-2">Time</label>
+                                    <input type="time" id="time" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="guests" class="block mb-2">Αριθμός Ατόμων</label>
+                                <select id="guests" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded focus:outline-none focus:border-primary">
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4 People</option>
+                                    <option value="5">5 People</option>
+                                    <option value="6">6+ People</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-dark font-bold py-3 px-4 rounded transition duration-300 transform hover:scale-105">Κάντε Κράτηση</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3141.783433847544!2d23.69791831532701!3d38.03428597970654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a199e9a1a607e5%3A0x5e46c1e1fc83142!2sPrespas%2022%2C%20Ilion%20131%2022!5e0!3m2!1sen!2sgr!4v1678905676785!5m2!1sen!2sgr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-smoking text-primary text-3xl animate-float"></i>
+                        <span class="text-2xl font-bold text-primary font-display">Hookah Lounge</span>
+                    </div>
+                    <p class="mt-2 text-gray-400">Premium Hookah Lounge & Shisha Bar</p>
+                </div>
+                
+                <div class="flex space-x-6 mb-6 md:mb-0 text-2xl">
+                    <a href="#" class="text-gray-400 hover:text-primary transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <p class="text-gray-400">© 2023 Cloud9 Hookah Lounge. All rights reserved.</p>
+                    <p class="text-sm text-gray-500 mt-1">Must be 21+ to enter. Consume responsibly.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-dark w-14 h-14 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('animate-fade-in');
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Form submission
+        const reservationForm = document.getElementById('reservation-form');
+        
+        reservationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const guests = document.getElementById('guests').value;
+            
+            // Here you would typically send this data to a server
+            // For this example, we'll just show an alert
+            alert(`Ευχαριστούμε, ${name}! Η κράτηση για ${guests} άτομα στις ${date} στις ${time} έχει ληφθεί. Θα επικοινωνήσουμε σύντομα για επιβεβαίωση.`);
+            
+            // Reset form
+            reservationForm.reset();
+        });
+        
+        // Menu tab filtering
+        const tabs = document.querySelectorAll('.menu-tab');
+        const flavorCards = document.querySelectorAll('.flavor-card');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active', 'text-dark', 'border-primary'));
+                tabs.forEach(t => t.classList.add('border-gray-700', 'text-light'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active', 'text-dark', 'border-primary');
+                tab.classList.remove('border-gray-700', 'text-light');
+                
+                const category = tab.getAttribute('data-category');
+                
+                // Show all cards if 'all' is selected
+                if (category === 'all') {
+                    flavorCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                // Filter cards based on category
+                flavorCards.forEach(card => {
+                    const cardCategories = card.getAttribute('data-category').split(' ');
+                    if (cardCategories.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        // Initialize menu to show all items
+        document.querySelector('.menu-tab[data-category="all"]').click();
+    </script>
+
+</html>
